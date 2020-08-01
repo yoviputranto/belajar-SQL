@@ -1,0 +1,71 @@
+
+SOAL 1 Membuat Database
+jawaban:
+CREATE DATABASE myshop;
+
+Soal 2 Membuat Table di dalam Database
+jawaban:
+table users
+CREATE TABLE `myshop`.`users` ( 
+`id` INT NOT NULL AUTO_INCREMENT , 
+`name` VARCHAR(255) NOT NULL , 
+`email` VARCHAR(255) NOT NULL , 
+`password` VARCHAR(255) NOT NULL , 
+PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+table items
+CREATE TABLE `myshop`.`items` ( 
+`id` INT NOT NULL AUTO_INCREMENT , 
+`name` VARCHAR(255) NOT NULL , 
+`description` VARCHAR(255) NOT NULL , 
+`price` INT NOT NULL , 
+`stock` INT NOT NULL , 
+`category_id` INT NOT NULL , 
+PRIMARY KEY (`id`), 
+FOREIGN KEY (`category_id`) REFERENCES categories(`id`)) 
+ENGINE = InnoDB;
+
+table categories
+CREATE TABLE `myshop`.`categories` ( 
+`id` INT NOT NULL AUTO_INCREMENT ,  
+`name` VARCHAR(255) NOT NULL ,    
+PRIMARY KEY  (`id`)) 
+ENGINE = InnoDB;
+
+Soal 3 Memasukkan Data pada Table
+jawaban:
+users
+INSERT INTO `users` VALUES 
+(NULL, 'John Doe', 'john@doe.com', 'john123'), 
+(NULL, 'Jane Doe', 'jane@doe.com', 'jenita123');
+
+categories
+INSERT INTO `categories` VALUES 
+(NULL, 'gadget'), 
+(NULL, 'cloth'), 
+(NULL, 'men'), 
+(NULL, 'women'), 
+(NULL, 'branded');
+
+items
+INSERT INTO `items` VALUES 
+(NULL, 'Sumsang b50', 'hape keren dari merek sumsang', '4000000', '100', '1'), 
+(NULL, 'Uniklooh', 'baju keren dari brand ternama', '500000', '50', '2'), 
+(NULL, 'IMHO Watch', 'jam tangan anak yang jujur banget', '2000000', '10', '1');
+
+Soal 4 Mengambil Data dari Database
+a. Mengambil data items
+SELECT `id`, `name`, `email` FROM `users`;
+
+b. Mengambil data items
+SELECT * FROM `items` WHERE `price` >1000000;
+SELECT * FROM `items` WHERE `name` LIKE '%sang%'
+
+c. Menampilkan data items join dengan kategori
+SELECT items.name, items.description, items.price, 
+items.stock, items.category_id, categories.name as 'kategori' 
+FROM items INNER JOIN categories ON categories.id=items.category_id;
+
+Soal 5 Mengubah Data dari Database
+jawaban:
+UPDATE `items` SET `price`= 2500000 WHERE name='Sumsang b50';
